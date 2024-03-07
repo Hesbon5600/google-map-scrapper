@@ -175,7 +175,7 @@ class WebDriver:
         google_maps_url = (
             "https://www.google.com/maps/search/"
             + urllib.parse.quote_plus(search_string)
-            + "?hl=fr"
+            + "?hl=en"
         )
         self.driver.get(google_maps_url)
 
