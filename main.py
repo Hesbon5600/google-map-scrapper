@@ -447,7 +447,7 @@ if __name__ == "__main__":
     if not companies_data:
         logger.info("No companies found")
     else:
-        with open(csv_file_dir, "w+", newline="") as csvfile:
+        with open(csv_file_dir, "w", newline="", encoding="utf-8") as csvfile:
             fieldnames = companies_data[0].keys()
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
