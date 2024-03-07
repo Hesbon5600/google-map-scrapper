@@ -170,11 +170,12 @@ class WebDriver:
         except Exception as e:
             logger.info("Open close time not found", extra={"error": e}, exc_info=True)
 
-    def get_companies_from_search(self, search_string):
+    def get_companies_from_search(self, search_string, scroll_count=10):
         logger.info("Getting companies from search")
         google_maps_url = (
             "https://www.google.com/maps/search/"
             + urllib.parse.quote_plus(search_string)
+            + "?hl=fr"
         )
         self.driver.get(google_maps_url)
 
@@ -192,7 +193,7 @@ class WebDriver:
             By.CSS_SELECTOR, f"div[aria-label='Results for {search_string}']"
         )
         pause_time = 2
-        max_count = 20
+        max_count = scroll_count
         x = 0
         logger.info("Scrolling the page")
         while x < max_count:
@@ -430,8 +431,9 @@ if __name__ == "__main__":
     scrapper = WebDriver(headless=False)
 
     search_string = "travel agencies in kenya"
+    scroll_count = 20
 
-    companies_data = scrapper.get_companies_from_search(search_string)
+    companies_data = scrapper.get_companies_from_search(search_string=search_string, scroll_count=scroll_count)
 
     current_time = time.strftime("%Y%m%d-%H%M%S")
     base_dir = os.path.dirname(os.path.abspath(__file__))
