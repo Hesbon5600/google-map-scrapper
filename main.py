@@ -441,6 +441,9 @@ if __name__ == "__main__":
         base_dir, "data", f"{current_time}-{search_string.replace(' ', '_')}.csv"
     )
 
+    if not os.path.exists(os.path.join(base_dir, "data")):
+        os.makedirs(os.path.join(base_dir, "data"))
+
     if not companies_data:
         logger.info("No companies found")
     else:
